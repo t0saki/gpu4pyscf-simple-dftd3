@@ -100,6 +100,7 @@ jobs:
       run: |
         conda activate wheel
         set -ex
+        ls -alh
         tar xvf gpu4pyscf-dftd3-*.tar.gz
         python -m build gpu4pyscf-dftd3-*/ --wheel
         auditwheel show gpu4pyscf-dftd3-*/dist/*.whl
