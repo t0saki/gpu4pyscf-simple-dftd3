@@ -3,7 +3,7 @@ requires = ["meson-python", "cffi"]
 build-backend = "mesonpy"
 
 [project]
-name = "dftd3"
+name = "gpu4pyscf-dftd3"
 version = "1.0.0"
 description = "Python API of the DFT-D3 project"
 readme = "README.rst"
