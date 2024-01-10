@@ -40,4 +40,4 @@ sdftd3_dep = dependency(
 )
 sdftd3_header = files('include'/'_dftd3.h')
 
-subdir('dftd3')
+subdir('gpu4pyscf_dftd3')
