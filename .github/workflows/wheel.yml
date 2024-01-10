@@ -101,15 +101,15 @@ jobs:
         conda activate wheel
         set -ex
         ls -alh
-        tar xvf gpu4pyscf-dftd3-*.tar.gz
-        python -m build gpu4pyscf-dftd3-*/ --wheel
-        auditwheel show gpu4pyscf-dftd3-*/dist/*.whl
-        auditwheel repair -w . gpu4pyscf-dftd3-*/dist/*.whl --plat ${{ env.plat }}
+        tar xvf gpu4pyscf_dftd3-*.tar.gz
+        python -m build gpu4pyscf_dftd3-*/ --wheel
+        auditwheel show gpu4pyscf_dftd3-*/dist/*.whl
+        auditwheel repair -w . gpu4pyscf_dftd3-*/dist/*.whl --plat ${{ env.plat }}
       env:
         plat: manylinux${{ matrix.python == '3.6' && '2010' || '_2_12' }}_x86_64
     - uses: actions/upload-artifact@v3
       with:
-        name: gpu4pyscf-dftd3-python-${{ matrix.python }}
+        name: gpu4pyscf_dftd3-python-${{ matrix.python }}
         path: ./*.whl
         retention-days: 5
 
