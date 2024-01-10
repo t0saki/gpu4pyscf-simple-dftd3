@@ -17,7 +17,7 @@
 # Standalone build for Python-API of DFT-D4, requires a dftd4 library
 # in the PKG_CONFIG_PATH environment variable to work.
 project(
-  'dftd3',
+  'gpu4pyscf_dftd3',
   'c',
   version: '1.0.0',
   license: 'LGPL-3.0-or-later',

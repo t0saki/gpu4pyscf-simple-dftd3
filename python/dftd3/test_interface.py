@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with s-dftd3.  If not, see <https://www.gnu.org/licenses/>.
 
-from dftd3.interface import (
+from gpu4pyscf_dftd3.interface import (
     Structure,
     RationalDampingParam,
     ZeroDampingParam,

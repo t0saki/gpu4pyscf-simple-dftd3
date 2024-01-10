@@ -16,13 +16,13 @@
 
 
 from pytest import approx
-from dftd3.parameters import get_damping_param, get_all_damping_params
+from gpu4pyscf_dftd3.parameters import get_damping_param, get_all_damping_params
 
 
 def get_data_file_name() -> str:
     """Make sure we can still test without installing"""
     from os.path import join, dirname, exists
-    from dftd3.parameters import get_data_file_name as _get_data_file_name
+    from gpu4pyscf_dftd3.parameters import get_data_file_name as _get_data_file_name
 
     data_file = join(dirname(__file__), "..", "..", "assets", "parameters.toml")
     return data_file if exists(data_file) else _get_data_file_name()
