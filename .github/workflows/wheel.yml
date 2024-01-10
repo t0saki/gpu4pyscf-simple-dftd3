@@ -19,7 +19,7 @@ jobs:
       with:
         environment-file: assets/ci/build-env.yaml
     - run: |
-        mv python/dftd3 python/simple_dftd3
+        mv python/dftd3 python/gpu4pyscf_dftd3
         meson setup _build
         meson dist -C _build --no-tests --include-subprojects
         mv _build/meson-dist/*.tar.xz .

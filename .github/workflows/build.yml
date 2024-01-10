@@ -134,7 +134,7 @@ jobs:
 
     - name: Rename to gpu4pyscf-dftd3
       run: >-
-        mv python/dftd3 python/simple_dftd3
+        mv python/dftd3 python/gpu4pyscf_dftd3
 
     - name: Configure build (meson)
       if: ${{ matrix.build == 'meson' }}
