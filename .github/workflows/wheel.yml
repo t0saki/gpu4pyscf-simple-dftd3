@@ -50,7 +50,7 @@ jobs:
         git subtree add --prefix python/subprojects/s-dftd3 . HEAD
         git mv {assets,python/dftd3}/parameters.toml
         git mv python/{mesonpep517,pyproject}.toml
-        git mv python/dftd3 python/simple_dftd3
+        git mv python/dftd3 python/gpu4pyscf_dftd3
         git commit -m "Python dist"
     - run: |
         python -m build python/ --sdist --outdir . -n
