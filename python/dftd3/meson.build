@@ -64,7 +64,7 @@ sdftd3_pyext = python.extension_module(
   ),
   dependencies: [sdftd3_dep, python_dep],
   install: install,
-  subdir: 'dftd3',
+  subdir: 'gpu4pyscf_dftd3',
 )
 
 pysrcs = files(
@@ -90,7 +90,7 @@ endif
 if install
   python.install_sources(
     pysrcs,
-    subdir: 'dftd3',
+    subdir: 'gpu4pyscf_dftd3',
     pure: false,
   )
 endif

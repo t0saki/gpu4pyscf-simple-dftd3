@@ -19,7 +19,7 @@ import pytest
 from pytest import approx, mark
 
 try:
-    from dftd3.qcschema import run_qcschema
+    from gpu4pyscf_dftd3.qcschema import run_qcschema
     import qcelemental as qcel
 except ModuleNotFoundError:
     qcel = None

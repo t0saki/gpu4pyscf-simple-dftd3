@@ -21,7 +21,7 @@ from pytest import approx, raises
 try:
     import pyscf
     from pyscf import lib, gto, scf
-    import dftd3.pyscf as disp
+    import gpu4pyscf_dftd3.pyscf as disp
 except ModuleNotFoundError:
     pyscf = None
 

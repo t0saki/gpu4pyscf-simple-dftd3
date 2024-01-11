@@ -16,8 +16,8 @@
 
 
 from pkg_resources import parse_version
-from dftd3 import __version__
-from dftd3.library import get_api_version
+from gpu4pyscf_dftd3 import __version__
+from gpu4pyscf_dftd3.library import get_api_version
 
 
 def test_api_version():

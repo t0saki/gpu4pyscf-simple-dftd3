@@ -78,7 +78,7 @@ else:
 
     cc = os.environ["CC"] if "CC" in os.environ else "cc"
 
-    module_name = "dftd3._libdftd3"
+    module_name = "gpu4pyscf_dftd3._libdftd3"
 
     p = subprocess.Popen(
         [cc, *cflags, "-E", "-"],

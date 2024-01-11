@@ -132,6 +132,10 @@ jobs:
         source /opt/intel/oneapi/setvars.sh
         printenv >> $GITHUB_ENV
 
+    - name: Rename to gpu4pyscf-dftd3
+      run: >-
+        mv python/dftd3 python/gpu4pyscf_dftd3
+
     - name: Configure build (meson)
       if: ${{ matrix.build == 'meson' }}
       run: >-
@@ -292,6 +296,10 @@ jobs:
       run: |
         cp assets/parameters.toml python/dftd3
 
+    - name: Rename to gpu4pyscf-dftd3
+      run: >-
+        mv python/dftd3 python/gpu4pyscf_dftd3
+
     - name: Install Python extension module (pip)
       run: pip3 install . -vv
       working-directory: python
@@ -299,7 +307,7 @@ jobs:
         PKG_CONFIG_PATH: ${{ env.PKG_CONFIG_PATH }}:${{ env.DFTD3_PREFIX }}/lib/pkgconfig
 
     - name: Test Python API
-      run: pytest --pyargs dftd3 --cov=dftd3 -vv
+      run: pytest --pyargs gpu4pyscf_dftd3 --cov=gpu4pyscf_dftd3 -vv
       env:
         LD_LIBRARY_PATH: ${{ env.LD_LIBRARY_PATH }}:${{ env.DFTD3_PREFIX }}/lib
         DYLD_LIBRARY_PATH: ${{ env.DYLD_LIBRARY_PATH }}:${{ env.DFTD3_PREFIX }}/lib

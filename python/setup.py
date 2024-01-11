@@ -18,5 +18,5 @@ from setuptools import setup
 
 setup(
     cffi_modules=["ffibuilder.py:ffibuilder"],
-    package_data={"dftd3": ["_libdftd3*.so", "parameters.toml"]},
+    package_data={"gpu4pyscf_dftd3": ["_libdftd3*.so", "parameters.toml"]},
 )

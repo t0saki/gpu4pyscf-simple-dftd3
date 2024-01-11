@@ -19,12 +19,13 @@ jobs:
       with:
         environment-file: assets/ci/build-env.yaml
     - run: |
+        mv python/dftd3 python/gpu4pyscf_dftd3
         meson setup _build
         meson dist -C _build --no-tests --include-subprojects
         mv _build/meson-dist/*.tar.xz .
     - uses: actions/upload-artifact@v3
       with:
-        name: dftd3-source
+        name: gpu4pyscf-dftd3-source
         path: ./*.tar.xz
         retention-days: 5
 
@@ -49,12 +50,13 @@ jobs:
         git subtree add --prefix python/subprojects/s-dftd3 . HEAD
         git mv {assets,python/dftd3}/parameters.toml
         git mv python/{mesonpep517,pyproject}.toml
+        git mv python/dftd3 python/gpu4pyscf_dftd3
         git commit -m "Python dist"
     - run: |
         python -m build python/ --sdist --outdir . -n
     - uses: actions/upload-artifact@v3
       with:
-        name: dftd3-python-sdist
+        name: gpu4pyscf-dftd3-python-sdist
         path: ./*.tar.gz
         retention-days: 5
 
@@ -95,20 +97,21 @@ jobs:
     - name: Download sdist
       uses: actions/download-artifact@v2
       with:
-        name: dftd3-python-sdist
+        name: gpu4pyscf-dftd3-python-sdist
     - name: Build wheel
       run: |
         conda activate wheel
         set -ex
-        tar xvf dftd3-*.tar.gz
-        python -m build dftd3-*/ --wheel
-        auditwheel show dftd3-*/dist/*.whl
-        auditwheel repair -w . dftd3-*/dist/*.whl --plat ${{ env.plat }}
+        ls -alh
+        tar xvf gpu4pyscf_dftd3-*.tar.gz
+        python -m build gpu4pyscf_dftd3-*/ --wheel
+        auditwheel show gpu4pyscf_dftd3-*/dist/*.whl
+        auditwheel repair -w . gpu4pyscf_dftd3-*/dist/*.whl --plat ${{ env.plat }}
       env:
         plat: manylinux${{ matrix.python == '3.6' && '2010' || '_2_12' }}_x86_64
     - uses: actions/upload-artifact@v3
       with:
-        name: dftd3-python-${{ matrix.python }}
+        name: gpu4pyscf_dftd3-python-${{ matrix.python }}
         path: ./*.whl
         retention-days: 5
 
@@ -127,7 +130,7 @@ jobs:
       - name: Create SHA256 checksums
         run: |
           set -ex
-          for output in dftd3*/*dftd3*; do
+          for output in *dftd3*/*dftd3*; do
             pushd $(dirname "$output")
             sha256sum $(basename "$output") | tee $(basename "$output").sha256
             popd
@@ -136,29 +139,29 @@ jobs:
       - name: Copy release artifacts
         run: |
           mkdir dist/
-          cp -v dftd3*/dftd3*.whl dftd3*/dftd3*.tar.gz dist/
+          cp -v *dftd3*/*dftd3*.whl *dftd3*/*dftd3*.tar.gz dist/
 
-      - name: Publish to Test PyPI
-        if: ${{ github.event_name == 'release' }}
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.TEST_PYPI_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
+      # - name: Publish to Test PyPI
+      #   if: ${{ github.event_name == 'release' }}
+      #   uses: pypa/gh-action-pypi-publish@release/v1
+      #   with:
+      #     user: __token__
+      #     password: ${{ secrets.TEST_PYPI_TOKEN }}
+      #     repository_url: https://test.pypi.org/legacy/
 
       - name: Upload assets
         uses: svenstaro/upload-release-action@v2
         if: ${{ github.event_name == 'release' }}
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: dftd3*/*dftd3*
+          file: gpu4pyscf_dftd3*/*dftd3*
           file_glob: true
           tag: ${{ github.ref }}
           overwrite: true
 
-      - name: Publish to PyPI
-        if: ${{ github.event_name == 'release' }}
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_TOKEN }}
+      # - name: Publish to PyPI
+      #   if: ${{ github.event_name == 'release' }}
+      #   uses: pypa/gh-action-pypi-publish@release/v1
+      #   with:
+      #     user: __token__
+      #     password: ${{ secrets.PYPI_TOKEN }}

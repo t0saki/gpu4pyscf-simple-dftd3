@@ -20,7 +20,7 @@ from pytest import approx, raises
 
 try:
     import ase
-    from dftd3.ase import DFTD3
+    from gpu4pyscf_dftd3.ase import DFTD3
     from ase.build import molecule
     from ase.calculators.emt import EMT
 except ModuleNotFoundError:
